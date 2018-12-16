@@ -1,0 +1,27 @@
+version: '3.4'
+
+services:
+  php:
+    image: php:7.3-fpm-alpine
+    env_file:
+      - ./.env
+    environment:
+      - CB_XMAS_VAR=flux
+    build:
+      context: ./app
+      target: app_php
+    volumes:
+      - ./app:/srv/app:rw,cached
+
+  nginx:
+    image: nginx:1.15-alpine
+    build:
+      context: ./app
+      target: app_nginx
+    volumes:
+      - ./app/public:/srv/app/public:ro
+    ports:
+      - 9003:80
+    depends_on:
+      - php
+      

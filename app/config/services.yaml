@@ -1,0 +1,17 @@
+parameters:
+    cb_xmas: '%env(CB_XMAS_VAR)%'
+
+services:
+    _defaults:
+        bind:
+            $envCBXmas: '%cb_xmas%'
+        autowire: true 
+        autoconfigure: true
+        
+    App\:
+        resource: '../src/*'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+
+    App\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
