@@ -1,5 +1,4 @@
 version: '3.4'
-
 services:
   php:
     image: php:7.3-fpm-alpine
@@ -12,7 +11,6 @@ services:
       target: app_php
     volumes:
       - ./app:/srv/app:rw,cached
-
   nginx:
     image: nginx:1.15-alpine
     build:
